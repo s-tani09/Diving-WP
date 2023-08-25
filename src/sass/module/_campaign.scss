@@ -1,7 +1,9 @@
 @use "global" as *;
-.campaign {
-  // overflow: hidden;
-}
+
+// .campaign {
+//   // overflow: hidden;
+// }
+
 .campaign__inner {
   position: relative;
 }
@@ -39,16 +41,16 @@
 }
 
 // 前へ次への矢印
-.campaign-button-prev,
-.campaign-button-next {
+.swiper-button-prev.campaign,
+.swiper-button-next.campaign {
   width: rem(80);
   height: rem(80);
   top: rem(22);
   transition: opacity 0.3s;
 }
 
-.campaign-button-prev::after,
-.campaign-button-next::after {
+.swiper-button-prev.campaign::after,
+.swiper-button-next.campaign::after {
   background-repeat: no-repeat;
   background-size: contain;
   content: "";
@@ -60,11 +62,11 @@
   }
 }
 
-.campaign-button-prev::after {
+.swiper-button-prev.campaign::after {
   background-image: url(../images/common/arrow-left.svg);
 }
 
-.campaign-button-next::after {
+.swiper-button-next.campaign::after {
   background-image: url(../images/common/arrow-right.svg);
 }
 
@@ -75,12 +77,12 @@
 
 .swiper-button-prev,
 .swiper-rtl .swiper-button-next {
-  left: var(--swiper-navigation-sides-offset, 76.5%);
+  // left: var(--swiper-navigation-sides-offset, 76.5%);
   right: auto;
 }
 
 .swiper-button-next,
 .swiper-rtl .swiper-button-prev {
   right: var(--swiper-navigation-sides-offset, 2%);
-  left: auto;
+  // left: auto;
 }

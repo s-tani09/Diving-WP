@@ -63,7 +63,7 @@ var swiper = new Swiper(".js-mv-slider", {
 });
 
 // campaign - swiper
-var swiper = new Swiper(".js-campaign-swiper", {
+var swiper2 = new Swiper(".js-campaign-swiper", {
   loop: true,
   slidesPerView: 1.26,
   breakpoints: {
