@@ -1,7 +1,7 @@
 @use "global" as *;
 
 // .campaign {
-//   // overflow: hidden;
+//   overflow: hidden;
 // }
 
 .campaign__inner {
@@ -41,33 +41,34 @@
 }
 
 // 前へ次への矢印
-.swiper-button-prev.campaign,
-.swiper-button-next.campaign {
+.swiper-button-prev,
+.swiper-button-next {
   width: rem(80);
   height: rem(80);
   top: rem(22);
   transition: opacity 0.3s;
 }
 
-.swiper-button-prev.campaign::after,
-.swiper-button-next.campaign::after {
+.swiper-button-prev::after {
+  background-image: url(../images/common/arrow-left.svg);
+}
+
+.swiper-button-next::after {
+  background-image: url(../images/common/arrow-right.svg);
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
   background-repeat: no-repeat;
   background-size: contain;
   content: "";
+  position: absolute;
   height: rem(80);
   width: rem(80);
   display: none;
   @include mq("md") {
     display: block;
   }
-}
-
-.swiper-button-prev.campaign::after {
-  background-image: url(../images/common/arrow-left.svg);
-}
-
-.swiper-button-next.campaign::after {
-  background-image: url(../images/common/arrow-right.svg);
 }
 
 .campaign-button-prev:hover,
@@ -77,12 +78,12 @@
 
 .swiper-button-prev,
 .swiper-rtl .swiper-button-next {
-  // left: var(--swiper-navigation-sides-offset, 76.5%);
+  left: var(--swiper-navigation-sides-offset, 76.5%);
   right: auto;
 }
 
 .swiper-button-next,
 .swiper-rtl .swiper-button-prev {
   right: var(--swiper-navigation-sides-offset, 2%);
-  // left: auto;
+  left: auto;
 }

@@ -2,12 +2,13 @@
 
 .blog-side-card {
   box-shadow: rem(4) rem(4) rem(10) rgba($color: $black1, $alpha: 0.25);
-  width: 100%;
-  padding: rem(16);
 }
 
 .blog-side-card a {
   transition: opacity 0.3s;
+  display: inline-block;
+  width: 100%;
+  padding: rem(16);
 }
 
 .blog-side-card__container {

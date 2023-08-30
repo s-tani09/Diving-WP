@@ -23,7 +23,7 @@
 
 .categories__item {
   font-size: rem(14);
-  padding: rem(5.5) 0;
+  // padding: rem(5.5) 0;
   width: 100%;
   text-align: center;
   color: $green1;
@@ -43,4 +43,14 @@
   color: $white;
   background-color: $green1;
   cursor: pointer;
+}
+
+.categories__item a {
+  display: inline-block;
+  width: 100%;
+  padding: rem(5.5) 0;
+}
+.js-categories-item.current {
+  color: $white;
+  background-color: $green1;
 }

@@ -159,3 +159,12 @@
 .button.button--green:hover span::after {
   background-image: url(../images/common/arrow-01.png);
 }
+
+.wpcf7-form-control.wpcf7-submit.has-spinner {
+  color: $white;
+  display: inline-block;
+}
+
+.button:hover input[type="submit"] {
+  color: $green1;
+}

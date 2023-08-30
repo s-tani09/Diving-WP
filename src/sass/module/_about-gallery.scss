@@ -85,3 +85,7 @@
     width: 100%;
   }
 }
+
+.about-gallery__image-item::marker {
+  content: none;
+}

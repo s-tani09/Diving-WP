@@ -135,18 +135,11 @@
 }
 
 .page-about__text-box {
-  margin-top: rem(19);
+  margin-top: rem(40);
   @include mq("md") {
     margin-top: 0;
     margin-left: rem(35);
     width: 50%;
-  }
-}
-
-.page-about__text-box {
-  margin-top: rem(40);
-  @include mq("md") {
-    margin-top: rem(52);
   }
 }
 

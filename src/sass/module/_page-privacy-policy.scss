@@ -48,13 +48,6 @@
   }
 }
 
-.privacy-policy__summary-top {
-  margin-top: rem(40);
-  font-size: rem(16);
-  line-height: 2;
-  font-family: "Noto Sans JP", sans-serif;
-}
-
 .privacy-policy__summary-bottom {
   margin-top: rem(34);
   font-size: rem(16);
@@ -64,22 +57,40 @@
   }
 }
 
-.privacy-policy__items {
-  margin-top: rem(32);
-}
-
 .privacy-policy__item-box {
   display: flex;
   flex-wrap: wrap;
 }
 
-.privacy-policy__text {
-  font-size: rem(16);
-  line-height: 2;
-  font-weight: $regular;
-}
-
 .privacy-policy__text--indent {
   padding-left: 1.5em;
   text-indent: -1.1em;
+}
+// WordPress
+.privacy-policy__contents ol:first-of-type {
+  margin-top: rem(32);
+}
+
+.privacy-policy__contents p {
+  margin-top: rem(22);
+  font-size: rem(16);
+  line-height: 2;
+  font-family: "Noto Sans JP", sans-serif;
+}
+.privacy-policy__contents ol {
+  list-style: decimal;
+}
+
+.privacy-policy__contents li {
+  font-size: rem(16);
+  line-height: 2;
+  font-weight: $regular;
+  margin-left: rem(24);
+}
+
+.privacy-policy__contents ul {
+  list-style: none;
+}
+.privacy-policy__contents ul li ul li {
+  list-style: disc;
 }

@@ -8,7 +8,9 @@
   padding-right: rem(33);
   @include mq("md") {
     grid-template-columns: repeat(2, 1fr);
-    gap: rem(80) rem(40);
+    // gap: rem(80) rem(40);
+    column-gap: rem(50);
+    row-gap: rem(80);
     padding-left: 0;
     padding-right: 0;
   }

@@ -31,7 +31,7 @@
   transform: rotate(90deg);
 }
 
-.side-archive__month span {
+.side-archive__month a {
   font-family: "Noto Sans JP", sans-serif;
   font-size: rem(24);
   line-height: calc(35 / 24);
@@ -40,7 +40,7 @@
   position: relative;
 }
 
-.side-archive__month span::before {
+.side-archive__month a::before {
   content: "";
   position: absolute;
   width: rem(17);
@@ -69,8 +69,30 @@
   display: none; /* すべての月リストを初めは非表示 */
 }
 
-.side-archive__list:first-of-type
-  .js-side-archive__year.open
-  + .side-archive__items {
+.side-archive__list:first-of-type .js-side-archive__year.open + .side-archive__items {
   display: block; /* 最初の年が open クラスを持っている場合に月リストを表示 */
+}
+
+// WordPress化
+.side-archive__item a {
+  display: inline-block;
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: rem(24);
+  line-height: calc(35 / 24);
+  color: $green1;
+  padding-left: rem(32);
+  position: relative;
+}
+
+.side-archive__item a::before {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  width: rem(17);
+  height: rem(20);
+  top: 50%;
+  left: rem(4);
+  transform: translateY(-50%);
+  background-color: $green1;
+  clip-path: polygon(0 0, 0 100%, 100% 50%);
 }

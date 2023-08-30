@@ -17,12 +17,12 @@
 </div>
 <main>
   <div class="breadcrumbs">
-    <div class="breadcrumbs">
-      <div class="breadcrumbs_inner inner">
-        <span><a href="index.html">TOP</a></span>
-        <span>&gt;</span>
-        <span>料金一覧</span>
-      </div>
+    <div class="breadcrumbs__inner inner">
+      <?php
+    if ( function_exists( 'bcn_display' ) ) {
+      bcn_display();
+    }
+  ?>
     </div>
     <section class="page-price sub-price">
       <div class="page-price__inner inner">
@@ -35,18 +35,19 @@
               </div>
             </div>
             <dl class="price-list__items">
+              <?php
+            $licenses = SCF::get('licenses');
+            foreach ($licenses as $license ) {
+              $license_course = esc_html( $license['license-course'] );
+              $license_price = esc_html( $license['license-price'] );?>
+              <?php if($license_course && $license_price): ?>
               <div class="price-list__item">
-                <dt class="price-list__course">オープンウォーター<br class="u-mobile" />ダイバーコース</dt>
-                <dd class="price-list__price">&yen;50&#44;000</dd>
+                <?php $license_course = str_replace("#BR#", "<br class='u-mobile'>", $license_course); ?>
+                <dt class="price-list__course"><?php echo $license_course ?></dt>
+                <dd class="price-list__price">&yen;<?php echo $license_price ?></dd>
               </div>
-              <div class="price-list__item">
-                <dt class="price-list__course">アドバンスド<br class="u-mobile" />オープンウォーターコース</dt>
-                <dd class="price-list__price">&yen;60&#44;000</dd>
-              </div>
-              <div class="price-list__item">
-                <dt class="price-list__course price-list__course--padding">レスキュー&nbsp;&plus;&nbsp;EFRコース</dt>
-                <dd class="price-list__price">&yen;70&#44;000</dd>
-              </div>
+              <?php endif; ?>
+              <?php } ?>
             </dl>
           </div>
           <div class="price-lists__content price-list" id="experience">
@@ -57,22 +58,19 @@
               </div>
             </div>
             <dl class="price-list__items">
+              <?php
+            $experiences = SCF::get('experiences');
+            foreach ($experiences as $experience ) {
+              $experience_course = esc_html( $experience['experience-course'] );
+              $experience_price = esc_html( $experience['experience-price'] );?>
+              <?php if($experience_course && $experience_price): ?>
               <div class="price-list__item">
-                <dt class="price-list__course">ビーチ体験ダイビング<br class="u-mobile" />(半日)</dt>
-                <dd class="price-list__price">&yen;7&#44;000</dd>
+                <?php $experience_course = str_replace("#BR#", "<br class='u-mobile'>", $experience_course); ?>
+                <dt class="price-list__course"><?php echo $experience_course ?></dt>
+                <dd class="price-list__price">&yen;<?php echo $experience_price ?></dd>
               </div>
-              <div class="price-list__item">
-                <dt class="price-list__course">ビーチ体験ダイビング<br class="u-mobile" />(1日)</dt>
-                <dd class="price-list__price">&yen;14&#44;000</dd>
-              </div>
-              <div class="price-list__item">
-                <dt class="price-list__course">ボート体験ダイビング<br class="u-mobile" />(半日)</dt>
-                <dd class="price-list__price">&yen;10&#44;000</dd>
-              </div>
-              <div class="price-list__item">
-                <dt class="price-list__course">ボート体験ダイビング<br class="u-mobile" />(1日)</dt>
-                <dd class="price-list__price">&yen;18&#44;000</dd>
-              </div>
+              <?php endif; ?>
+              <?php } ?>
             </dl>
           </div>
           <div class="price-lists__content price-list" id="diving">
@@ -83,25 +81,22 @@
               </div>
             </div>
             <dl class="price-list__items">
+              <?php
+            $funs = SCF::get('funs');
+            foreach ($funs as $fun ) {
+              $fun_course = esc_html( $fun['fun-course'] );
+              $fun_price = esc_html( $fun['fun-price'] );?>
+              <?php if($fun_course && $fun_price): ?>
               <div class="price-list__item">
-                <dt class="price-list__course">ビーチダイビング<br class="u-mobile" />(2ダイブ)</dt>
-                <dd class="price-list__price">&yen;14&#44;000</dd>
+                <?php $fun_course = str_replace("#BR#", "<br class='u-mobile'>", $fun_course); ?>
+                <dt class="price-list__course"><?php echo $fun_course ?></dt>
+                <dd class="price-list__price">&yen;<?php echo $fun_price ?></dd>
               </div>
-              <div class="price-list__item">
-                <dt class="price-list__course">ボートダイビング<br class="u-mobile" />(2ダイブ)</dt>
-                <dd class="price-list__price">&yen;18&#44;000</dd>
-              </div>
-              <div class="price-list__item">
-                <dt class="price-list__course">スペシャルダイビング<br class="u-mobile" />(2ダイブ)</dt>
-                <dd class="price-list__price">&yen;24&#44;000</dd>
-              </div>
-              <div class="price-list__item">
-                <dt class="price-list__course">ナイトダイビング<br class="u-mobile" />(1ダイブ)</dt>
-                <dd class="price-list__price">&yen;10&#44;000</dd>
-              </div>
+              <?php endif; ?>
+              <?php } ?>
             </dl>
           </div>
-          <div class="price-lists__content price-list">
+          <div class="price-lists__content price-list" id="price-special">
             <div class="price-list__heading">
               <h2 class="price-list__title">スペシャルダイビング</h2>
               <div class="price-list__image">
@@ -110,18 +105,19 @@
               </div>
             </div>
             <dl class="price-list__items">
+              <?php
+            $specials = SCF::get('specials');
+            foreach ($specials as $special ) {
+              $special_course = esc_html( $special['special-course'] );
+              $special_price = esc_html( $special['special-price'] );?>
+              <?php if($special_course && $special_price): ?>
               <div class="price-list__item">
-                <dt class="price-list__course">貸切ダイビング<br class="u-mobile" />(2ダイブ)</dt>
-                <dd class="price-list__price">&yen;24&#44;000</dd>
+                <?php $special_course = str_replace("#BR#", "<br class='u-mobile'>", $special_course); ?>
+                <dt class="price-list__course"><?php echo $special_course ?></dt>
+                <dd class="price-list__price">&yen;<?php echo $special_price ?></dd>
               </div>
-              <div class="price-list__item">
-                <dt class="price-list__course">1日ダイビング<br class="u-mobile" />(3ダイブ)</dt>
-                <dd class="price-list__price">&yen;32&#44;000</dd>
-              </div>
-              <div class="price-list__item">
-                <dt class="price-list__course">ナイトダイビング<br class="u-mobile" />(2ダイブ)</dt>
-                <dd class="price-list__price">&yen;14&#44;000</dd>
-              </div>
+              <?php endif; ?>
+              <?php } ?>
             </dl>
           </div>
         </div>

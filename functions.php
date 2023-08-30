@@ -36,11 +36,11 @@ function my_script_init()
 {
 // css
 
-	wp_enqueue_style( 'style-css', get_template_directory_uri() . '/dist/assets/css/style.css', array(), '1.0.1', 'all' );
-	wp_enqueue_style( 'swiper-css', '//cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css', array(), '9.0.0', 'all' );
-	wp_enqueue_style( 'noto-sans', 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" rel="stylesheet" rel="stylesheet"', array(), '1.0.0', 'all' );
-	wp_enqueue_style( 'gotu', '//fonts.googleapis.com/css2?family=Gotu&display=swap" rel="stylesheet"', array(), '1.0.0', 'all' );
-	wp_enqueue_style( 'lato', '//fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet"', array(), '1.0.0', 'all' );
+wp_enqueue_style( 'noto-sans', 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" rel="stylesheet" rel="stylesheet"', array(), '1.0.0', 'all' );
+wp_enqueue_style( 'gotu', '//fonts.googleapis.com/css2?family=Gotu&display=swap" rel="stylesheet"', array(), '1.0.0', 'all' );
+wp_enqueue_style( 'lato', '//fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet"', array(), '1.0.0', 'all' );
+wp_enqueue_style( 'swiper-css', '//cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css', array(), '9.0.0', 'all' );
+wp_enqueue_style( 'style-css', get_template_directory_uri() . '/dist/assets/css/style.css', array(), '1.0.1', 'all' );
 
 
 	// js
@@ -161,18 +161,167 @@ function my_excerpt_more( $more ) {
 add_filter( 'excerpt_more', 'my_excerpt_more' );
 
 
-/* -------------------------------------------- * アイキャッチ画像を有効化 * -------------------------------------------- */
+// アイキャッチ画像を有効化
 function setup_post_thumbnails(){
 	add_theme_support('post-thumbnails', [['blog', 'campaign','voice']]);
 }
 add_action('after_setup_theme', 'setup_post_thumbnails');
 
-function camp_change_posts_per_page( $query ) {
+// カスタム投稿タイプ「campaign」のアーカイブページの投稿表示件数を変更する関数
+function custom_change_campaign_posts_per_page( $query ) {
+	// 管理画面やカスタムクエリでは実行しない
 	if ( is_admin() || ! $query->is_main_query() ) {
-		return;
+			return;
 	}
-	if ( $query->is_post_type_archive('campaign') ) { // 「is_archive」ではなく「is_post_type_archive」を使用
-		$query->set( 'posts_per_page', 4 );
+	// 「campaign」投稿タイプのアーカイブページのみ対象とする
+	if ( $query->is_post_type_archive( 'campaign' ) ) {
+			// 投稿表示件数を4件に設定
+			$query->set( 'posts_per_page', 4 );
+	}
+	if ( $query->is_tax( 'campaign_category' ) ) {
+			// 投稿表示件数を4件に設定
+			$query->set( 'posts_per_page', 4 );
 	}
 }
-add_action( 'pre_get_posts', 'camp_change_posts_per_page' );
+add_action( 'pre_get_posts', 'custom_change_campaign_posts_per_page' );
+
+// ポストタイプアーカイブページの投稿表示件数を変更する関数
+function custom_change_posts_per_page( $query ) {
+	// 管理画面やカスタムクエリでは実行しない
+	if ( is_admin() || ! $query->is_main_query() ) {
+			return;
+	}
+	// 「voice」投稿タイプのアーカイブページのみ対象とする
+	if ( $query->is_post_type_archive( 'voice' ) ) {
+			// 投稿表示件数を6件に設定
+			$query->set( 'posts_per_page', 6 );
+	}
+	if ( $query->is_tax( 'voice_category' ) ) {
+			// 投稿表示件数を6件に設定
+			$query->set( 'posts_per_page', 6 );
+	}
+}
+add_action( 'pre_get_posts', 'custom_change_posts_per_page' );
+
+// Contact Form7の送信ボタンをクリックした後の遷移先設定
+add_action( 'wp_footer', 'add_origin_thanks_page' );
+function add_origin_thanks_page() {
+$thanks = home_url('/contact-thanks/');
+  echo <<< EOC
+    <script>
+      var thanksPage = {
+        204: '{$thanks}',
+      };
+    document.addEventListener( 'wpcf7mailsent', function( event ) {
+      location = thanksPage[event.detail.contactFormId];
+    }, false );
+    </script>
+  EOC;
+}
+
+ //特定の固定ページのエディタを表示にする
+add_filter('use_block_editor_for_post', function($use_block_editor, $post){
+    if($post->post_type === 'page'){
+        if(!in_array($post->post_name, ['privacy-policy', 'terms-of-service'])){ // ページスラッグが該当しないならコンテンツエディターを非表示
+            remove_post_type_support('page', 'editor');
+            return false;
+        }
+    }
+    return $use_block_editor;
+}, 10, 2);
+
+//「投稿」の名称変更
+function Change_menulabel() {
+	global $menu;
+	global $submenu;
+	$name = 'ブログ';
+	$menu[5][0] = $name;
+	$submenu['edit.php'][5][0] = $name.'一覧';
+	$submenu['edit.php'][10][0] = '新しい'.$name;
+}
+function Change_objectlabel() {
+	global $wp_post_types;
+	$name = 'お知らせ';
+	$labels = &$wp_post_types['post']->labels;
+	$labels->name = $name;
+	$labels->singular_name = $name;
+	$labels->add_new = _x('追加', $name);
+	$labels->add_new_item = $name.'の新規追加';
+	$labels->edit_item = $name.'の編集';
+	$labels->new_item = '新規'.$name;
+	$labels->view_item = $name.'を表示';
+	$labels->search_items = $name.'を検索';
+	$labels->not_found = $name.'が見つかりませんでした';
+	$labels->not_found_in_trash = 'ゴミ箱に'.$name.'は見つかりませんでした';
+}
+add_action( 'init', 'Change_objectlabel' );
+add_action( 'admin_menu', 'Change_menulabel' );
+
+
+// ContactForm7で自動挿入されるPタグ、brタグを削除
+add_filter('wpcf7_autop_or_not', 'wpcf7_autop_return_false');
+function wpcf7_autop_return_false() {
+	return false;
+}
+
+// campaignタイトルをcontactフォームのドロップダウンに反映させる
+function dynamic_field_values ( $tag, $unused ) {
+	if ( $tag['name'] != 'campaign' )  // Contact Form 7内に記入するフィールド名
+			return $tag;
+	$args = array (
+			'numberposts'   => -1, //全件
+			'post_type'     => 'campaign', // 動的に表示させるカスタム投稿タイプ名（投稿タイプスラッグ）
+			'orderby'       => 'title', // ソート対象 - タイトルで並び替え
+			'order'         => 'ASC', // ソート順 - 最低から最高へ昇順 (1, 2, 3; a, b, c)
+	);
+	$custom_posts = get_posts($args);
+	if ( ! $custom_posts )
+			return $tag;
+	// タイトルの最初に「以下から選択してください」を追加
+	$tag['raw_values'][] = 'キャンペーン内容を選択';
+	$tag['values'][] = 'キャンペーン内容を選択';
+	$tag['labels'][] = 'キャンペーン内容を選択';
+
+	foreach ( $custom_posts as $custom_post ) {
+
+			$tag['raw_values'][] = $custom_post->post_title;
+			$tag['values'][] = $custom_post->post_title;
+			$tag['labels'][] = $custom_post->post_title;
+	}
+	return $tag;
+}
+add_filter( 'wpcf7_form_tag', 'dynamic_field_values', 10, 2);
+
+// 記事のPVを取得
+function getPostViews($postID) {
+  $count_key = 'post_views_count';
+  $count = get_post_meta($postID, $count_key, true);
+  if ($count=='') {
+    delete_post_meta($postID, $count_key);
+    add_post_meta($postID, $count_key, '0');
+    return "0 View";
+  }
+  return $count.' Views';
+}
+
+// 記事のPVをカウントする
+function setPostViews($postID) {
+  $count_key = 'post_views_count';
+  $count = get_post_meta($postID, $count_key, true);
+  if ($count=='') {
+    $count = 0;
+    delete_post_meta($postID, $count_key);
+    add_post_meta($postID, $count_key, '0');
+  } else {
+    $count++;
+    update_post_meta($postID, $count_key, $count);
+  }
+
+  // デバッグ start
+  // echo '';
+  // echo 'console.log("postID: ' . $postID .'");';
+  // echo 'console.log("カウント: ' . $count .'");';
+  // echo '';
+  // デバッグ end
+}
+remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);

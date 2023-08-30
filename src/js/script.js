@@ -15,7 +15,7 @@ jQuery(function ($) {
           },
         });
         $(".loading__image").addClass("is-hidden");
-        $(".header").addClass("color");
+        // $(".header").addClass("color");
         loadingElement.hide();
       }, 2200);
     }, 2200);
@@ -115,6 +115,14 @@ box.each(function () {
   });
 });
 
+let currentUrl = window.location.href;
+$(".js-categories-item").each(function () {
+  let linkUrl = $(this).attr("href");
+  if (currentUrl === linkUrl) {
+    $(this).addClass("current");
+  }
+});
+
 // Information - tab
 $(document).ready(function () {
   // 別ページから遷移した際の処理
@@ -136,8 +144,8 @@ $(document).ready(function () {
     showCategory(index);
   });
   function showCategory(index) {
-    $(".js-information-tab").removeClass("current");
-    $(".js-information-tab").eq(index).addClass("current");
+    $(".js-information-tab").removeClass("is-active");
+    $(".js-information-tab").eq(index).addClass("is-active");
     $(".js-information-content").hide().eq(index).fadeIn(300);
   }
   function getIndexFromHash(hash) {
@@ -181,7 +189,7 @@ $(document).ready(function () {
     // さらに微調整
     position -= 30; // 24px だけタブメニューがかかる程度に調整
 
-    $("body,html").animate({ scrollTop: position }, 600, "swing");
+    $("body,html").animate({ scrollTop: position }, 500, "swing");
   }
 });
 
@@ -254,51 +262,45 @@ $(function () {
   $(".js-faq-lists:first-of-type .js-faq-question").addClass("is-open");
   // タイトルをクリックすると
   $(".js-faq-question").on("click", function () {
-    // クリックしたタイトル以外のis-openクラスを外す
-    $(".js-faq-question").not(this).removeClass("is-open");
-    // クリックしたタイトル以外のcontentを閉じる
-    $(".js-faq-question").not(this).next().slideUp(300);
-    // クリックしたタイトルにis-openクラスを付与
-    $(this).toggleClass("is-open");
-    // クリックしたタイトルのcontentを開閉
+    // クリックした次の要素を開閉
     $(this).next().slideToggle(300);
+    // タイトルにopenクラスを付け外しして矢印の向きを変更
+    $(this).toggleClass("is-open", 300);
   });
 });
 
 // error-message表示
-$(document).ready(function () {
-  $(".js-error-button").click(function (event) {
-    var formValid = true;
-
-    // 全ての必須フィールドをループでチェック
-    $(".form__input-text[required]").each(function () {
-      if ($(this).val() === "") {
-        formValid = false;
-        $(this).addClass("error");
-      } else {
-        $(this).removeClass("error");
-      }
-    });
-
-    // プライバシーチェックボックスもチェック
-    if (!$(".form__privacy-text").is(":checked")) {
-      formValid = false;
-      $(".form__privacy-text").addClass("error");
-    } else {
-      $(".form__privacy-text").removeClass("error");
-    }
-    // フォームが無効な場合は送信をキャンセル
-    if (!formValid) {
-      event.preventDefault();
-      $(".page-contact__error").show();
-      // エラー時にパンくずリストを表示
-      $(".breadcrumbs__item.error").show();
-    } else {
-      // フォームが有効な場合はサンクスページにリダイレクト
-      window.location.href = "page-contact-thanks.html"; // サンクスページのURLに置き換えてください
-    }
-  });
-});
+// $(document).ready(function () {
+//   $(".js-error-button").click(function (event) {
+//     var formValid = true;
+//     // 全ての必須フィールドをループでチェック
+//     $(".form__input-text[required]").each(function () {
+//       if ($(this).val() === "") {
+//         formValid = false;
+//         $(this).addClass("error");
+//       } else {
+//         $(this).removeClass("error");
+//       }
+//     });
+//     // プライバシーチェックボックスもチェック
+//     if (!$(".form__privacy-text").is(":checked")) {
+//       formValid = false;
+//       $(".form__privacy-text").addClass("error");
+//     } else {
+//       $(".form__privacy-text").removeClass("error");
+//     }
+//     // フォームが無効な場合は送信をキャンセル
+//     if (!formValid) {
+//       event.preventDefault();
+//       $(".page-contact__error").show();
+//       // エラー時にパンくずリストを表示
+//       $(".breadcrumbs__item.error").show();
+//     } else {
+//       // フォームが有効な場合はサンクスページにリダイレクト
+//       window.location.href = "page-contact-thanks.html"; // サンクスページのURLに置き換えてください
+//     }
+//   });
+// });
 
 // footer
 $(window).on("load resize", function () {

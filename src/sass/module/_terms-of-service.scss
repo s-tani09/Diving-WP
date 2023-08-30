@@ -83,3 +83,32 @@
   padding-left: 1.5em;
   text-indent: -1.1em;
 }
+
+// WordPress
+.terms-of-service__contents ol:first-of-type {
+  margin-top: rem(32);
+}
+
+.terms-of-service__contents p {
+  margin-top: rem(22);
+  font-size: rem(16);
+  line-height: 2;
+  font-family: "Noto Sans JP", sans-serif;
+}
+.terms-of-service__contents ol {
+  list-style: decimal;
+}
+
+.terms-of-service__contents li {
+  font-size: rem(16);
+  line-height: 2;
+  font-weight: $regular;
+  margin-left: rem(24);
+}
+
+.terms-of-service__contents ul {
+  list-style: none;
+}
+.terms-of-service__contents ul li ul li {
+  list-style: disc;
+}

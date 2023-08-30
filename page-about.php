@@ -1,26 +1,24 @@
 <?php get_header(); ?>
 
-<div class="sub-mv">
-  <div class="sub-mv__inner">
-    <div class="sub-mv__image">
-      <picture>
-        <source media="(min-width: 768px)"
-          srcset="<?php echo get_template_directory_uri() ?>/dist/assets/images/common/about-sub-pc.jpg" />
-        <img src="<?php echo get_template_directory_uri() ?>/dist/assets/images/common/about-sub-sp.jpg"
-          alt="２匹の魚が会話をしているかのように向き合って泳いでいる様子" />
-      </picture>
-    </div>
-    <div class="sub-mv__heading">
-      <h1 class="sub-mv__title">about&nbsp;us</h1>
+<main>
+  <div class="sub-mv">
+    <div class="sub-mv__inner">
+      <div class="sub-mv__image">
+        <picture>
+          <source media="(min-width: 768px)"
+            srcset="<?php echo get_template_directory_uri() ?>/dist/assets/images/common/about-sub-pc.jpg" />
+          <img src="<?php echo get_template_directory_uri() ?>/dist/assets/images/common/about-sub-sp.jpg"
+            alt="２匹の魚が会話をしているかのように向き合って泳いでいる様子" />
+        </picture>
+      </div>
+      <div class="sub-mv__heading">
+        <h1 class="sub-mv__title">about&nbsp;us</h1>
+      </div>
     </div>
   </div>
-</div>
-<main>
   <div class="breadcrumbs">
-    <div class="breadcrumbs_inner inner">
-      <span><a href="index.html">TOP</a></span>
-      <span>&gt;</span>
-      <span>私たちについて</span>
+    <div class="breadcrumbs__inner inner">
+      <?php if ( function_exists( 'bcn_display' ) ) { bcn_display(); } ?>
     </div>
   </div>
 
@@ -41,8 +39,7 @@
         <h2 class="page-about__heading">Dive&nbsp;into<br />the&nbsp;Ocean</h2>
         <div class="page-about__text-box">
           <p class="page-about__text">
-            ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br />
-            ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
+            「Dive&nbsp;into&nbsp;the&nbsp;Ocean」は、海の美と冒険を楽しむためのプラットフォームです。海の魅力や生態系の驚異をダイビング愛好者や初心者に提供し、最新のダイビング情報と知識を通じて海洋の魅力を広めています。<br />私たちの使命は、ダイビングの素晴らしさを伝え、人々が海に感動し、冒険を始める一歩を踏み出すお手伝いです。
           </p>
         </div>
       </div>
@@ -58,33 +55,19 @@
       <div class="about-gallery__content">
         <div class="about-gallery__modal js-modal-window"></div>
         <div class="about-gallery__image-items">
-          <div class="about-gallery__image-item js-modal">
-            <img src="<?php echo get_template_directory_uri() ?>/dist/assets/images/common/gallery1.jpg"
-              alt="珊瑚に群がる赤い魚たちが映っている様子" />
-          </div>
-          <div class="about-gallery__image-item js-modal">
-            <img src="<?php echo get_template_directory_uri() ?>/dist/assets/images/common/gallery2.jpg"
-              alt="エメラルドグリーンの海辺" />
-          </div>
-          <div class="about-gallery__image-item js-modal">
-            <img src="<?php echo get_template_directory_uri() ?>/dist/assets/images/common/gallery3.jpg"
-              alt="白と黒の縞模様で尾鰭が黄色い魚が２匹泳いでいる様子" />
-          </div>
-          <div class="about-gallery__image-item js-modal">
-            <img src="<?php echo get_template_directory_uri() ?>/dist/assets/images/common/gallery4.jpg"
-              alt="黄色い魚が泳いでいる様子" />
-          </div>
-          <div class="about-gallery__image-item js-modal">
-            <img src="<?php echo get_template_directory_uri() ?>/dist/assets/images/common/gallery5.jpg"
-              alt="たくさんの魚たちが泳いでいる様子" />
-          </div>
-          <div class="about-gallery__image-item js-modal">
-            <img src="<?php echo get_template_directory_uri() ?>/dist/assets/images/common/gallery6.jpg"
-              alt="珊瑚に群がる魚たちの様子" />
-          </div>
+          <?php
+                $gallery_images = SCF::get('gallery-images');
+                foreach ($gallery_images as $gallery) {
+                    $gallery_piece = wp_get_attachment_url($gallery['gallery_item']);
+                    if ($gallery_piece): ?>
+          <li class="about-gallery__image-item js-modal"><img src="<?php echo $gallery_piece ?>" alt="ギャラリーイメージ画像">
+          </li>
+          <?php endif;
+                } ?>
         </div>
       </div>
     </div>
   </section>
+
 </main>
 <?php get_footer(); ?>

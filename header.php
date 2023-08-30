@@ -13,7 +13,10 @@
 
 <?php
 $home = esc_url( home_url( '/' ) );
-$campaign = esc_url( home_url( '/campaign/' ) );
+$campaign = esc_url(home_url('/campaign'));
+$license = esc_url(home_url('/campaign_category/license/'));
+$experience = esc_url(home_url('/campaign_category/experience/'));
+$diving = esc_url(home_url('/campaign_category/diving/'));
 $about = esc_url( home_url( '/about/' ) );
 $information = esc_url( home_url( '/information/' ) );
 $blog = esc_url( home_url( '/blog/' ) );
@@ -23,26 +26,12 @@ $faq = esc_url( home_url( '/faq/' ) );
 $contact = esc_url( home_url( '/contact/' ) );
 $policy = esc_url( home_url( '/privacy-policy/' ) );
 $terms = esc_url( home_url( '/terms-of-service/' ) );
-$sitemap = esc_url( home_url( '/sitemap/' ) );
+$sitemap = esc_url( home_url( '/site-map/' ) );
 ?>
 
 <body <?php body_class(); ?>>
   <?php wp_body_open(); ?>
-  <!-- loading -->
-  <!-- <div class="loading js-loading">
-    <div class="loading__title">
-      <p class="loading__title-main is-close">diving</p>
-      <p class="loading__title-sub is-close">into&nbsp;the&nbsp;ocean</p>
-    </div>
-    <div class="loading__image">
-      <img class="loading__image-left loading__image-left--fadeUp"
-        src="<?php echo get_theme_file_uri(); ?>/dist/assets/images/common/loading-left.jpg"
-        alt="綺麗なエメラルドグリーンの海底を歩くウミガメの様子" />
-      <img class="loading__image-right loading__image-right--fadeUp delay"
-        src="<?php echo get_theme_file_uri(); ?>/dist/assets/images/common/loading-right.jpg"
-        alt="綺麗なエメラルドグリーンの海底を歩くウミガメ" />
-    </div>
-  </div> -->
+
   <header class="header header-layout js-header">
     <div class="header__inner">
       <h1 class="header__logo">
@@ -134,7 +123,7 @@ $sitemap = esc_url( home_url( '/sitemap/' ) );
                 <a href="<?php echo $license; ?>">ライセンス取得</a>
               </li>
               <li class="sp-nav__left-item">
-                <a href="<?php echo $fun; ?>">ファンダイビング</a>
+                <a href="<?php echo $diving; ?>">ファンダイビング</a>
               </li>
               <li class="sp-nav__left-item">
                 <a href="<?php echo $experience; ?>">体験ダイビング</a>
@@ -192,17 +181,17 @@ $sitemap = esc_url( home_url( '/sitemap/' ) );
             </ul>
             <ul class="sp-nav__right-items">
               <li class="sp-nav__right-item">
-                <a href="<?php echo $site_map; ?>">サイトマップ</a>
+                <a href="<?php echo $sitemap; ?>">サイトマップ</a>
               </li>
             </ul>
             <ul class="sp-nav__right-items">
               <li class="sp-nav__right-item">
-                <a href="<?php echo $privacy_policy; ?>">プライバシー<br />ポリシー</a>
+                <a href="<?php echo $policy; ?>">プライバシー<br />ポリシー</a>
               </li>
             </ul>
             <ul class="sp-nav__right-items">
               <li class="sp-nav__right-item">
-                <a href="<?php echo $terms_of_service; ?>">利用規約</a>
+                <a href="<?php echo $terms; ?>">利用規約</a>
               </li>
             </ul>
             <ul class="sp-nav__right-items">

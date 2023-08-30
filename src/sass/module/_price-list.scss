@@ -54,55 +54,51 @@
 }
 
 .price-list__items {
+  border: rem(1) solid $green1;
+  border-top: none;
+  width: 100%;
   @include mq("md") {
     width: 71%;
   }
 }
 
 .price-list__item {
-  display: flex;
   align-items: center;
-  border-bottom: rem(1) solid $green1;
-  border-left: rem(1) solid $green1;
-  border-right: rem(1) solid $green1;
+  border-top: rem(1) solid $green1;
+  display: flex;
+  height: rem(64);
+  width: 100%;
   position: relative;
   @include mq("md") {
-  }
-}
-
-.price-list__item:first-child {
-  @include mq("md") {
-    border-top: rem(1) solid $green1;
+    height: auto;
+    text-align: left;
   }
 }
 
 .price-list__course {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 69.5%;
   text-align: center;
+  height: inherit;
   padding: rem(6) rem(16) rem(5);
   border-right: rem(1) solid $green1;
   font-family: "Noto Sans JP", sans-serif;
   @include mq("md") {
     width: 68%;
     text-align: left;
-    padding: rem(18) rem(16) rem(17);
-  }
-}
-
-.price-list__course--padding {
-  padding: rem(18) rem(16) rem(17);
-  @include mq("md") {
-    padding: rem(17) rem(16) rem(17);
+    padding: rem(18) rem(16);
   }
 }
 
 .price-list__price {
   font-family: "Noto Sans JP", sans-serif;
   width: 30.5%;
-  padding: rem(18) rem(16) rem(17);
+  padding: rem(20) rem(16);
   text-align: right;
   @include mq("md") {
     width: 32%;
-    padding: rem(18) rem(16) rem(17);
+    padding: rem(18) rem(16);
   }
 }

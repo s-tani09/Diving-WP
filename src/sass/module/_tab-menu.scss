@@ -32,7 +32,7 @@
   display: inline-block;
 }
 
-.tab-menu__list.current {
+.tab-menu__list.is-active {
   background-color: $green1;
   color: $white;
 }
@@ -73,7 +73,7 @@
 //   }
 // }
 
-.tab-whale-icon.current span::before {
+.tab-whale-icon.is-active span::before {
   @include mq("md") {
     background-image: url(../images/common/tab-whale-hover.png);
   }
@@ -108,7 +108,7 @@
 //   }
 // }
 
-.tab-shark-icon.current span::before {
+.tab-shark-icon.is-active span::before {
   @include mq("md") {
     background-image: url(../images/common/tab-shark-hover.png);
   }
@@ -142,7 +142,7 @@
 //   }
 // }
 
-.tab-fish-icon.current span::before {
+.tab-fish-icon.is-active span::before {
   @include mq("md") {
     background-image: url(../images/common/tab-fish-hover.png);
   }
