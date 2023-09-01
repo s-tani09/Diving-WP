@@ -19,34 +19,35 @@
   <div class="breadcrumbs">
     <div class="breadcrumbs__inner inner">
       <?php
-    if ( function_exists( 'bcn_display' ) ) {
-      bcn_display();
-    }
-  ?>
+            if ( function_exists( 'bcn_display' ) ) {
+              bcn_display();
+            }
+            ?>
     </div>
-    <div class="page-faq sub-faq">
-      <div class="page-faq__inner inner">
-        <div class="page-faq__contents">
-          <dl class="page-faq__content faq-lists js-faq-lists">
-            <?php
+  </div>
+  <div class="page-faq sub-faq">
+    <div class="page-faq__inner inner">
+      <div class="page-faq__contents">
+        <dl class="page-faq__content faq-lists js-faq-lists">
+          <?php
             $faq_group = SCF::get('faq-group');
             foreach ($faq_group as $fields ) {; ?>
-            <?php if(esc_html( $fields['question'] ) && esc_html( $fields['answer'] )): ?>
-            <div class="faq-lists__items faq-list">
-              <dt class="faq-list__question js-faq-question">
-                <p class="faq-list__title"><?php echo esc_html( $fields['question'] ); ?></p>
-              </dt>
-              <dd class="faq-list__answer js-faq-answer">
-                <p class="faq-list__explanation">
-                  <?php echo esc_html( $fields['answer'] ); ?>
-                </p>
-              </dd>
-            </div>
-            <?php endif; ?>
-            <?php } ?>
-          </dl>
-        </div>
+          <?php if(esc_html( $fields['question'] ) && esc_html( $fields['answer'] )): ?>
+          <div class="faq-lists__items faq-list">
+            <dt class="faq-list__question js-faq-question">
+              <p class="faq-list__title"><?php echo esc_html( $fields['question'] ); ?></p>
+            </dt>
+            <dd class="faq-list__answer js-faq-answer">
+              <p class="faq-list__explanation">
+                <?php echo esc_html( $fields['answer'] ); ?>
+              </p>
+            </dd>
+          </div>
+          <?php endif; ?>
+          <?php } ?>
+        </dl>
       </div>
     </div>
+  </div>
 </main>
 <?php get_footer(); ?>

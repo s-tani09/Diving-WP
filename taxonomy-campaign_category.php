@@ -19,10 +19,12 @@
     </div>
   </div>
   <div class="breadcrumbs">
-    <div class="breadcrumbs_inner inner">
-      <span><a href="index.html">TOP</a></span>
-      <span>&gt;</span>
-      <span>キャンペーン</span>
+    <div class="breadcrumbs__inner inner">
+      <?php
+            if ( function_exists( 'bcn_display' ) ) {
+              bcn_display();
+            }
+            ?>
     </div>
   </div>
   <section class="archive-campaign sub-campaign">

@@ -19,18 +19,19 @@
   <div class="breadcrumbs">
     <div class="breadcrumbs__inner inner">
       <?php
-      if ( function_exists( 'bcn_display' ) ) {
-        bcn_display();
-      }
-      ?>
+            if ( function_exists( 'bcn_display' ) ) {
+              bcn_display();
+            }
+            ?>
     </div>
-    <section class="terms-of-service sub-terms-of-service">
-      <div class="terms-of-service__inner inner">
-        <div class="terms-of-service__contents">
-          <h2 class="terms-of-service__title"><?php the_title(); ?></h2>
-          <?php the_content(); ?>
-        </div>
+  </div>
+  <section class="terms-of-service sub-terms-of-service">
+    <div class="terms-of-service__inner inner">
+      <div class="terms-of-service__contents">
+        <h2 class="terms-of-service__title"><?php the_title(); ?></h2>
+        <?php the_content(); ?>
       </div>
-    </section>
+    </div>
+  </section>
 </main>
 <?php get_footer(); ?>

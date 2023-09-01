@@ -54,30 +54,6 @@ $sitemap = esc_url( home_url( '/sitemap/' ) );
             }
         }
         ?>
-        <!-- <div class="mv__slider-image swiper-slide">
-          <picture>
-            <source media="(min-width: 768px)"
-              srcset="<?php echo get_theme_file_uri(); ?>/dist/assets/images/common/mv-01.jpg" />
-            <img src="<?php echo get_template_directory_uri() ?>/dist/assets/images/common/mv-sp-01.jpg"
-              alt="ウミガメと一緒に泳ぐダイバーたちの様子" />
-          </picture>
-        </div>
-        <div class="mv__slider-image swiper-slide">
-          <picture>
-            <source media="(min-width: 768px)"
-              srcset="<?php echo get_theme_file_uri(); ?>/dist/assets/images/common/mv-02.jpg" />
-            <img src="<?php echo get_template_directory_uri() ?>/dist/assets/images/common/mv-sp-02.jpg"
-              alt="広い海で航海する船の様子" />
-          </picture>
-        </div>
-        <div class="mv__slider-image swiper-slide">
-          <picture>
-            <source media="(min-width: 768px)"
-              srcset="<?php echo get_theme_file_uri(); ?>/dist/assets/images/common/mv-03.jpg" />
-            <img src="<?php echo get_template_directory_uri() ?>/dist/assets/images/common/mv-sp-03.jpg"
-              alt="エメラルドグリーンの海と白い砂浜が映っている様子" />
-          </picture>
-        </div> -->
       </div>
     </div>
     <div class="mv__title">

@@ -19,17 +19,18 @@
   <div class="breadcrumbs">
     <div class="breadcrumbs__inner inner">
       <?php
-    if ( function_exists( 'bcn_display' ) ) {
-      bcn_display();
-    }
-  ?>
+            if ( function_exists( 'bcn_display' ) ) {
+              bcn_display();
+            }
+            ?>
     </div>
-    <div class="privacy-policy sub-privacy-policy">
-      <div class="privacy-policy__inner inner">
-        <div class="privacy-policy__contents">
-          <h2 class="privacy-policy__title"><?php the_title(); ?></h2>
-          <?php the_content(); ?>
-        </div>
+  </div>
+  <div class="privacy-policy sub-privacy-policy">
+    <div class="privacy-policy__inner inner">
+      <div class="privacy-policy__contents">
+        <h2 class="privacy-policy__title"><?php the_title(); ?></h2>
+        <?php the_content(); ?>
       </div>
+    </div>
 </main>
 <?php get_footer(); ?>

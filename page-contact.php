@@ -18,23 +18,11 @@
   </div>
   <div class="breadcrumbs">
     <div class="breadcrumbs__inner inner">
-      <ol class="breadcrumbs__items">
-        <li class="breadcrumbs__item">
-          <a href="index.html">TOP</a>
-        </li>
-        <li class="breadcrumbs__item">
-          <span>&gt;</span>
-        </li>
-        <li class="breadcrumbs__item">
-          <a href="page-contact.html">お問い合わせ</a>
-        </li>
-        <li class="breadcrumbs__item error">
-          <span>&gt;</span>
-        </li>
-        <li class="breadcrumbs__item error">
-          <a href="#">お問い合わせエラー</a>
-        </li>
-      </ol>
+      <?php
+            if ( function_exists( 'bcn_display' ) ) {
+              bcn_display();
+            }
+            ?>
     </div>
   </div>
 
