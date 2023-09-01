@@ -279,6 +279,10 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
+.wpcf7-not-valid-tip {
+  opacity: 0;
+}
+
 .wpcf7-not-valid {
   // border: rem(1) solid $red;
   background-color: rgba($color: $red, $alpha: 0.2);
@@ -290,4 +294,12 @@ input[type="checkbox"] {
 .wpcf7-not-valid#textarea-1 {
   border: rem(1) solid $red;
   background-color: rgba($color: $red, $alpha: 0.2);
+}
+
+.wpcf7 form.invalid .wpcf7-response-output,
+.wpcf7 form.unaccepted .wpcf7-response-output,
+.wpcf7 form.payment-required .wpcf7-response-output {
+  border-color: transparent;
+  color: $red;
+  text-align: center;
 }
