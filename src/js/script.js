@@ -20,6 +20,84 @@ jQuery(function ($) {
       }, 2200);
     }, 2200);
   });
+  $(document).ready(function () {
+    setTimeout(function () {
+      const loadingElement = $(".js-loading");
+      loadingElement.addClass("is-close");
+      setTimeout(function () {
+        const swiper = new Swiper(".js-mv-slider", {
+          loop: true,
+          speed: 2000,
+          effect: "fade",
+          autoplay: {
+            delay: 2000,
+            disableOnInteraction: false,
+          },
+        });
+        $(".js-loading-image").addClass("is-hidden");
+        $(".js-header").addClass("color");
+        loadingElement.hide();
+      }, 2200);
+    }, 2200);
+  });
+  $(function () {
+    var flg = null;
+    var check_access = function check_access() {
+      // ★sessionStorageの値を判定
+      if (sessionStorage.getItem("access_flg")) {
+        // 2回目以降
+        flg = 1;
+      } else {
+        // 1回目
+        sessionStorage.setItem("access_flg", true);
+        flg = 0;
+      }
+      return flg;
+    };
+    var $i = check_access();
+    if ($i == 0) {
+      // 1回目アクセスの処理
+      $(document).ready(function () {
+        setTimeout(function () {
+          var loadingElement = $(".js-loading");
+          loadingElement.addClass("is-close");
+          setTimeout(function () {
+            var swiper = new Swiper(".js-mv-slider", {
+              loop: true,
+              speed: 2000,
+              effect: "fade",
+              autoplay: {
+                delay: 2000,
+                disableOnInteraction: false,
+              },
+            });
+            $(".js-loading-image").addClass("is-hidden");
+            $(".js-header").addClass("color");
+            loadingElement.hide();
+          }, 2200);
+        }, 2200);
+      });
+    } else {
+      // 2回目アクセスの処理
+      $(document).ready(function () {
+        $(".js-loading").hide();
+        $(".js-loading-image").addClass("is-hidden");
+        $("body").css("display", "block");
+        setTimeout(function () {
+          var swiper = new Swiper(".js-mv-slider", {
+            loop: true,
+            speed: 2000,
+            effect: "fade",
+            autoplay: {
+              delay: 2000,
+              disableOnInteraction: false,
+            },
+          });
+          $(".js-header").addClass("color");
+        }, 2200);
+      });
+    }
+  });
 });
 
 // ハンバーガーメニュー

@@ -29,7 +29,7 @@ $contact = esc_url( home_url( '/contact/' ) );
       <div class="archive-campaign__categories categories">
         <div class="categories__inner">
           <ul class="categories__items" id="categories">
-            <li class="categories__item current">
+            <li class="categories__item js-categories-item">
               <a href="<?php echo esc_url(home_url('/campaign/')); ?>">ALL</a>
             </li>
             <?php
@@ -39,9 +39,8 @@ $contact = esc_url( home_url( '/contact/' ) );
               $terms = get_terms($args);
               ?>
             <?php foreach ($terms as $term): ?>
-            <li class="categories__item">
-              <a class="js-categories-item"
-                href="<?php echo get_term_link($term->term_id); ?>"><?php echo $term->name; ?></a>
+            <li class="categories__item js-categories-item">
+              <a href="<?php echo get_term_link($term->term_id); ?>"><?php echo $term->name; ?></a>
             </li>
             <?php endforeach; ?>
           </ul>
