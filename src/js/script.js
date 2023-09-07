@@ -1,45 +1,25 @@
 jQuery(function ($) {
   // この中であればWordpressでも「$」が使用可能になる
   // ローディング
-  $(document).ready(function () {
-    setTimeout(function () {
-      const loadingElement = $(".js-loading");
-      loadingElement.addClass("is-close");
+  // $(document).ready(function () {
+  //   setTimeout(function () {
+  //     const loadingElement = $(".js-loading");
+  //     loadingElement.addClass("is-close");
 
-      setTimeout(function () {
-        const swiper1 = new Swiper(".js-mv__slider", {
-          loop: true,
-          speed: 1500,
-          autoplay: {
-            delay: 2000,
-          },
-        });
-        $(".loading__image").addClass("is-hidden");
-        // $(".header").addClass("color");
-        loadingElement.hide();
-      }, 2200);
-    }, 2200);
-  });
-  $(document).ready(function () {
-    setTimeout(function () {
-      const loadingElement = $(".js-loading");
-      loadingElement.addClass("is-close");
-      setTimeout(function () {
-        const swiper = new Swiper(".js-mv-slider", {
-          loop: true,
-          speed: 2000,
-          effect: "fade",
-          autoplay: {
-            delay: 2000,
-            disableOnInteraction: false,
-          },
-        });
-        $(".js-loading-image").addClass("is-hidden");
-        $(".js-header").addClass("color");
-        loadingElement.hide();
-      }, 2200);
-    }, 2200);
-  });
+  //     setTimeout(function () {
+  //       const swiper1 = new Swiper(".js-mv__slider", {
+  //         loop: true,
+  //         speed: 1500,
+  //         autoplay: {
+  //           delay: 2000,
+  //         },
+  //       });
+  //       $(".loading__image").addClass("is-hidden");
+  //       // $(".header").addClass("color");
+  //       loadingElement.hide();
+  //     }, 2200);
+  //   }, 2200);
+  // });
   $(function () {
     var flg = null;
     var check_access = function check_access() {

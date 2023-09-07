@@ -16,15 +16,8 @@
   </div>
 </div>
 <main>
-  <div class="breadcrumbs">
-    <div class="breadcrumbs__inner inner">
-      <?php
-    if ( function_exists( 'bcn_display' ) ) {
-      bcn_display();
-    }
-  ?>
-    </div>
-  </div>
+  <!-- パンくず -->
+  <?php get_template_part('parts/breadcrumb') ?>
   <section class="page-price sub-price">
     <div class="page-price__inner inner">
       <div class="page-price__contents price-lists">

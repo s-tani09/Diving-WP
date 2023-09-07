@@ -24,6 +24,7 @@
   background-color: $green1;
   clip-path: polygon(0 0, 0 100%, 100% 50%);
   transition: all 0.3s;
+  cursor: pointer;
 }
 
 .side-archive__year.open span::before {

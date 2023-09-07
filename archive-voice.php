@@ -16,16 +16,8 @@
       </div>
     </div>
   </div>
-  <div class="breadcrumbs">
-    <div class="breadcrumbs__inner inner">
-      <?php
-    if ( function_exists( 'bcn_display' ) ) {
-      bcn_display();
-    }
-  ?>
-    </div>
-  </div>
-
+  <!-- パンくず -->
+  <?php get_template_part('parts/breadcrumb') ?>
 
   <section class="archive-voice sub-voice">
     <div class="archive-voice__inner inner">

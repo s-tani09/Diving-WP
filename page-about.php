@@ -16,11 +16,8 @@
       </div>
     </div>
   </div>
-  <div class="breadcrumbs">
-    <div class="breadcrumbs__inner inner">
-      <?php if ( function_exists( 'bcn_display' ) ) { bcn_display(); } ?>
-    </div>
-  </div>
+  <!-- パンくず -->
+  <?php get_template_part('parts/breadcrumb') ?>
 
   <section class="page-about sub-page-about">
     <div class="page-about__inner inner">

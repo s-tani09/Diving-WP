@@ -31,15 +31,8 @@ $sitemap = esc_url( home_url( '/site-map/' ) );
       </div>
     </div>
   </div>
-  <div class="breadcrumbs">
-    <div class="breadcrumbs__inner inner">
-      <?php
-            if ( function_exists( 'bcn_display' ) ) {
-              bcn_display();
-            }
-            ?>
-    </div>
-  </div>
+  <!-- パンくず -->
+  <?php get_template_part('parts/breadcrumb') ?>
   <div class="page-site-map sub-site-map">
     <div class="page-site-map__inner inner">
       <nav class="page-site-map__content site-map">

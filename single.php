@@ -21,15 +21,8 @@
       </div>
     </div>
   </div>
-  <div class="breadcrumbs">
-    <div class="breadcrumbs__inner inner">
-      <?php
-            if ( function_exists( 'bcn_display' ) ) {
-              bcn_display();
-            }
-            ?>
-    </div>
-  </div>
+  <!-- パンくず -->
+  <?php get_template_part('parts/breadcrumb') ?>
 
   <section class="post-blog sub-blog">
     <div class="post-blog__inner inner">
@@ -53,27 +46,6 @@
           <?php else: ?>
           <p>記事が見つかりませんでした</p>
           <?php endif; ?>
-          <!-- <div class="blog-detail__image">
-              <img src="<?php echo get_template_directory_uri() ?>/dist/assets/images/common/blog-01.jpg"
-                alt="白い珊瑚が映っている様子" />
-            </div>
-            <div class="blog-detail__text">
-              <p>
-                ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
-              </p>
-              <nav>
-                <ul>
-                  <li>リスト1</li>
-                  <li>リスト2</li>
-                  <li>リスト3</li>
-                </ul>
-              </nav>
-            </div>
-            <div class="blog-detail__text">
-              <p>
-                ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
-              </p>
-            </div> -->
 
           <div class="blog-detail__pagenavi">
             <?php if (get_previous_post()):?>

@@ -19,18 +19,15 @@ $contact = esc_url( home_url( '/contact/' ) );
       </div>
     </div>
   </div>
-  <div class="breadcrumbs">
-    <div class="breadcrumbs__inner inner">
-      <?php if ( function_exists( 'bcn_display' ) ) { bcn_display(); } ?>
-    </div>
-  </div>
+  <!-- パンくず -->
+  <?php get_template_part('parts/breadcrumb') ?>
   <section class="archive-campaign sub-campaign">
     <div class="archive-campaign__inner inner">
       <div class="archive-campaign__categories categories">
         <div class="categories__inner">
           <ul class="categories__items" id="categories">
-            <li class="categories__item js-categories-item">
-              <a href="<?php echo esc_url(home_url('/campaign/')); ?>">ALL</a>
+            <li class="categories__item">
+              <a class="js-categories-item" href="<?php echo esc_url(home_url('/campaign/')); ?>">ALL</a>
             </li>
             <?php
               $args = [
@@ -39,8 +36,9 @@ $contact = esc_url( home_url( '/contact/' ) );
               $terms = get_terms($args);
               ?>
             <?php foreach ($terms as $term): ?>
-            <li class="categories__item js-categories-item">
-              <a href="<?php echo get_term_link($term->term_id); ?>"><?php echo $term->name; ?></a>
+            <li class="categories__item">
+              <a class="js-categories-item"
+                href="<?php echo get_term_link($term->term_id); ?>"><?php echo $term->name; ?></a>
             </li>
             <?php endforeach; ?>
           </ul>

@@ -16,24 +16,15 @@
       </div>
     </div>
   </div>
-  <div class="breadcrumbs">
-    <div class="breadcrumbs__inner inner">
-      <?php
-            if ( function_exists( 'bcn_display' ) ) {
-              bcn_display();
-            }
-            ?>
-    </div>
-  </div>
-
-
+  <!-- パンくず -->
+  <?php get_template_part('parts/breadcrumb') ?>
   <section class="archive-voice sub-voice">
     <div class="archive-voice__inner inner">
       <div class="archive-voice__categories categories">
         <div class="categories__inner">
           <ul class="categories__items">
-            <li class="categories__item current">
-              <a href="<?php echo esc_url(home_url('/voice/')); ?>">ALL</a>
+            <li class="categories__item">
+              <a class="js-categories-item" href="<?php echo esc_url(home_url('/voice/')); ?>">ALL</a>
             </li>
             <?php
             $args = [

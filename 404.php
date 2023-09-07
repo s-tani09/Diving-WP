@@ -5,15 +5,8 @@
   <main>
     <section class="not-found sub-not-found">
       <div class="not-found__inner inner">
-        <div class="breadcrumbs">
-          <div class="breadcrumbs__inner inner">
-            <?php
-            if ( function_exists( 'bcn_display' ) ) {
-              bcn_display();
-            }
-            ?>
-          </div>
-        </div>
+        <!-- パンくず -->
+        <?php get_template_part('parts/breadcrumb') ?>
         <div class="not-found__content">
           <h1 class="not-found__title">404</h1>
           <p class="not-found__text">申し訳ありません。<br />お探しのページが見つかりません。</p>

@@ -16,15 +16,8 @@
       </div>
     </div>
   </div>
-  <div class="breadcrumbs">
-    <div class="breadcrumbs__inner inner">
-      <?php
-            if ( function_exists( 'bcn_display' ) ) {
-              bcn_display();
-            }
-            ?>
-    </div>
-  </div>
+  <!-- パンくず -->
+  <?php get_template_part('parts/breadcrumb') ?>
   <div class="privacy-policy sub-privacy-policy">
     <div class="privacy-policy__inner inner">
       <div class="privacy-policy__contents">
