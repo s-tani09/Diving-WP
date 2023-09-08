@@ -162,9 +162,9 @@ const jsBabel = () => {
 // ブラウザーシンク
 const browserSyncOption = {
   notify: false,
-  server: "../dist/", // ローカルサーバーのルートディレクトリ
+  // server: "../dist/", // ローカルサーバーのルートディレクトリ
   //WordPressの場合は↓を有効にする。その場合、↑(server)はコメントアウトする。
-  // proxy: "diving-wordpress.local", // ローカルサーバーのURL（WordPress）
+  proxy: "diving-wordpress.local", // ローカルサーバーのURL（WordPress）
 };
 const browserSyncFunc = () => {
   browserSync.init(browserSyncOption);
