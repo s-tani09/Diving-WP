@@ -39,9 +39,6 @@
 
 .tab-menu__list:hover {
   cursor: pointer;
-  // color: $white;
-  // background-color: $green1;
-  // opacity: 1;
 }
 
 .tab-whale-icon span {
@@ -57,7 +54,7 @@
     position: absolute;
     width: rem(64);
     height: rem(64);
-    top: rem(-14);
+    top: rem(-18);
     left: rem(-6);
     background-image: url(../images/common/tab-whale.png);
     background-repeat: no-repeat;
@@ -66,12 +63,6 @@
     transition: 0.3s background-color;
   }
 }
-
-// .tab-whale-icon:hover span::before {
-//   @include mq("md") {
-//     background-image: url(../images/common/tab-whale-hover.png);
-//   }
-// }
 
 .tab-whale-icon.is-active span::before {
   @include mq("md") {
@@ -92,7 +83,7 @@
     position: absolute;
     width: rem(64);
     height: rem(64);
-    top: rem(-15);
+    top: rem(-21);
     left: rem(-1);
     background-image: url(../images/common/tab-shark.png);
     background-repeat: no-repeat;
@@ -101,12 +92,6 @@
     transition: 0.3s background-color;
   }
 }
-
-// .tab-shark-icon:hover span::before {
-//   @include mq("md") {
-//     background-image: url(../images/common/tab-shark-hover.png);
-//   }
-// }
 
 .tab-shark-icon.is-active span::before {
   @include mq("md") {
@@ -126,7 +111,7 @@
     position: absolute;
     width: rem(64);
     height: rem(64);
-    top: rem(-14);
+    top: rem(-16);
     left: rem(-6);
     background-image: url(../images/common/tab-fish.png);
     background-repeat: no-repeat;
@@ -135,12 +120,6 @@
     transition: 0.3s background-color;
   }
 }
-
-// .tab-fish-icon:hover span::before {
-//   @include mq("md") {
-//     background-image: url(../images/common/tab-fish-hover.png);
-//   }
-// }
 
 .tab-fish-icon.is-active span::before {
   @include mq("md") {

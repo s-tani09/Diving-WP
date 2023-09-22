@@ -317,11 +317,14 @@ function setPostViews($postID) {
     update_post_meta($postID, $count_key, $count);
   }
 
-  // デバッグ start
-  // echo '';
-  // echo 'console.log("postID: ' . $postID .'");';
-  // echo 'console.log("カウント: ' . $count .'");';
-  // echo '';
-  // デバッグ end
 }
 remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
+
+/* 料金一覧*/
+SCF::add_options_page( '', '料金一覧', 'manage_options', 'theme-options-price', 'dashicons-money-alt', 9 );
+
+/* よくある質問*/
+SCF::add_options_page( '', 'よくある質問', 'manage_options', 'theme-options-faq', 'dashicons-format-chat', 9 );
+
+/* 私たちについて*/
+SCF::add_options_page( '', 'ギャラリー', 'manage_options', 'theme-options-gallery', 'dashicons-format-gallery', 9 );

@@ -37,23 +37,19 @@ $sitemap = esc_url( home_url( '/sitemap/' ) );
   <div class="mv__inner">
     <div class="mv__slider swiper js-mv-slider">
       <div class="mv__slider-wrapper swiper-wrapper">
+        <?php for ($i = 1; $i <= 4; $i++) : ?>
         <?php
-        for ($i = 1; $i <= 4; $i++) {
-            $main_pc_image = get_field('main-pc_' . $i);
-            $main_sp_image = get_field('main-sp_' . $i);
-
-            if ($main_pc_image && $main_sp_image) {
-                ?>
+            $main_pc_image = esc_url(get_field('main-pc_' . $i));
+            $main_sp_image = esc_url(get_field('main-sp_' . $i));
+            if ($main_pc_image && $main_sp_image) :?>
         <div class="mv__slider-image swiper-slide">
           <picture>
-            <source media="(min-width: 768px)" srcset="<?php echo esc_url($main_pc_image); ?>" />
-            <img src="<?php echo esc_url($main_sp_image); ?>" alt="綺麗なエメラルドグリーンの海底を歩くウミガメの様子<?php echo $i; ?>" />
+            <source media="(min-width: 768px)" srcset="<?php echo $main_pc_image; ?>" />
+            <img src="<?php echo $main_sp_image; ?>" alt="綺麗なエメラルドグリーンの海底を歩くウミガメの様子<?php echo $i; ?>" />
           </picture>
         </div>
-        <?php
-            }
-        }
-        ?>
+        <?php endif; ?>
+        <?php endfor; ?>
       </div>
     </div>
     <div class="mv__title">
@@ -63,6 +59,7 @@ $sitemap = esc_url( home_url( '/sitemap/' ) );
   </div>
 </div>
 
+
 <section class="campaign top-campaign">
   <div class="campaign__inner inner">
     <div class="campaign__title section-title">
@@ -71,31 +68,31 @@ $sitemap = esc_url( home_url( '/sitemap/' ) );
     </div>
     <div class="campaign__slider campaign-cards swiper js-campaign-swiper">
       <?php
-  $args = [
-  'post_type' => 'campaign',
-  'posts_per_page' => 10
-  ];
-  $the_query = new WP_Query($args); ?>
+      $args = [
+        'post_type' => 'campaign',
+        'posts_per_page' => 10
+      ];
+      $the_query = new WP_Query($args); ?>
       <?php if ($the_query->have_posts()) : ?>
       <ul class="campaign-cards__items swiper-wrapper">
         <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
         <li class="campaign-cards__item campaign-card swiper-slide">
-          <?php if (has_post_thumbnail()) { ?>
+          <?php if (has_post_thumbnail()) : ?>
           <div class="campaign-card__image">
             <?php the_post_thumbnail(); ?>
           </div>
-          <?php } else { ?>
+          <?php else : ?>
           <div class="campaign-card__image">
             <img src="<?php echo esc_url(get_template_directory_uri()); ?>/dist/assets/images/common/no-image.jpg"
               alt="画像無し">
           </div>
-          <?php } ?>
+          <?php endif; ?>
           <div class="campaign-card__body">
             <div class="campaign-card__category">
               <?php
                 $terms = get_the_terms($post->ID, 'campaign_category');
                 foreach ($terms as $term) {
-                echo $term->name;
+                  echo $term->name;
                 }
                 ?>
             </div>
@@ -104,15 +101,23 @@ $sitemap = esc_url( home_url( '/sitemap/' ) );
           <div class="campaign-card__textBlock">
             <p class="campaign-card__text">全部コミコミ(お一人様)</p>
             <div class="campaign-card__price">
-              <p class="campaign-card__price-regular">&yen;<?php the_field('price'); ?></p>
-              <p class="campaign-card__price-sale">&yen;<?php the_field('price_sale'); ?></p>
+              <?php if (get_field('price')) : ?>
+              <?php $price = floatval(str_replace(',', '', get_field('price'))); ?>
+              <p class="campaign-card__price-regular">&yen;<?php echo number_format($price); ?></p>
+              <?php endif; ?>
+
+              <?php if (get_field('price_sale')) : ?>
+              <?php $price_sale = floatval(str_replace(',', '', get_field('price_sale'))); ?>
+              <p class="campaign-card__price-sale">&yen;<?php echo number_format($price_sale); ?></p>
+              <?php endif; ?>
+
             </div>
           </div>
         </li>
         <?php endwhile; ?>
-        <?php wp_reset_postdata(); ?>
-        <?php endif; ?>
       </ul>
+      <?php wp_reset_postdata(); ?>
+      <?php endif; ?>
     </div>
     <div class="campaign-button-prev swiper-button-prev js-campaign-button-prev u-desktop"></div>
     <div class="campaign-button-next swiper-button-next js-campaign-button-next u-desktop"></div>
@@ -121,6 +126,7 @@ $sitemap = esc_url( home_url( '/sitemap/' ) );
     </div>
   </div>
 </section>
+
 
 <section class="about top-about">
   <div class="about__inner inner">
@@ -183,7 +189,7 @@ $sitemap = esc_url( home_url( '/sitemap/' ) );
 
 <section class="blog top-blog">
   <div class="blog__bg-image u-desktop">
-    <img src="<?php echo get_template_directory_uri() ?>/dist/assets/images/common/blog-bg.jpg"
+    <img src="<?php echo esc_url(get_template_directory_uri()); ?>/dist/assets/images/common/blog-bg.jpg"
       alt="海の水面をアップして映し出した様子" />
   </div>
   <div class="blog__inner inner">
@@ -193,44 +199,42 @@ $sitemap = esc_url( home_url( '/sitemap/' ) );
     </div>
     <?php
     $args = array(
-      'post_type'  => 'post',
+      'post_type' => 'post',
       'posts_per_page' => 3
     );
-    $the_query = new WP_Query($args);
-    if ($the_query->have_posts()) : ?>
+    $the_query = new WP_Query($args); ?>
+    <?php if ($the_query->have_posts()) : ?>
     <ul class="blog__items blog-cards">
       <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
       <li class="blog-cards__item blog-card">
         <a href="<?php the_permalink(); ?>">
           <div class="blog-card__container">
             <div class="blog-card__image">
-              <?php if (has_post_thumbnail()) { ?>
+              <?php if (has_post_thumbnail()) : ?>
               <?php the_post_thumbnail('medium'); ?>
-              <?php } else { ?><img
-                src="<?php echo esc_url(get_theme_file_uri('')); ?>/dist/assets/images/common/no-image.jpg" alt="画像無し">
-              <?php } ?>
+              <?php else : ?>
+              <img src="<?php echo esc_url(get_template_directory_uri()); ?>/dist/assets/images/common/no-image.jpg"
+                alt="画像無し">
+              <?php endif; ?>
             </div>
             <div class="blog-card__body">
               <div class="blog-card__meta">
                 <time class="blog-card__date" datetime="<?php the_time('Y-m-d'); ?>"><?php the_time('Y.m.d'); ?></time>
               </div>
               <div class="blog-card__text-block">
-                <h3 class="blog-card__title"><?php echo wp_trim_words( get_the_title(), 15, '…' ); ?></h3>
-                <p class="blog-card__text">
-                  <?php the_excerpt(); ?></p>
+                <h3 class="blog-card__title"><?php echo wp_trim_words(get_the_title(), 15, '…'); ?></h3>
+                <p class="blog-card__text"><?php the_excerpt(); ?></p>
               </div>
             </div>
           </div>
         </a>
-        <?php endwhile; ?>
       </li>
-      <?php
-        // -------- WP_query終了-----------
-        wp_reset_postdata();
-    endif; ?>
+      <?php endwhile; ?>
     </ul>
+    <?php wp_reset_postdata(); ?>
+    <?php endif; ?>
     <div class="blog__button">
-      <a href="<?php echo $blog; ?>" class="button"><span>view&nbsp;more</span></a>
+      <a href="<?php echo esc_url($blog); ?>" class="button"><span>view&nbsp;more</span></a>
     </div>
   </div>
 </section>
@@ -241,55 +245,60 @@ $sitemap = esc_url( home_url( '/sitemap/' ) );
       <p class="section-title__main">voice</p>
       <h2 class="section-title__sub">お客様の声</h2>
     </div>
+
     <?php
     $args = array(
       'post_type'  => 'voice',
-      'posts_per_page' => 2
+      'posts_per_page' => 2,
+      'orderby' => 'rand'
     );
     $the_query = new WP_Query($args);
-    if ($the_query->have_posts()) : ?>
+    ?>
+
+    <?php if ($the_query->have_posts()): ?>
     <div class="voice__cards voice-cards">
-      <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
+      <?php while ($the_query->have_posts()): $the_query->the_post(); ?>
       <div class="voice-cards__container voice-card">
         <div class="voice-card__wrap">
           <div class="voice-card__box">
             <div class="voice-card__meta">
               <?php
-              $age =  get_field('voice-age');
-              $gender = get_field('voice-gender');
-              ?>
-              <p class="voice-card__age"><?php if($age): ?><?php echo $age ?>代<?php endif; ?>(<?php echo $gender ?>)
-              </p>
+                $age = get_field('voice-age');
+                $gender = get_field('voice-gender'); ?>
+              <p class="voice-card__age">
+                <?php if($age): ?><?php echo esc_html($age); ?><?php endif; ?>代(<?php echo esc_html($gender) ?>)</p>
               <?php
                 $taxonomy_terms = get_the_terms($post->ID, 'voice_category');
-                if ($taxonomy_terms) {
-                  echo '<p class="voice-card__category">' . $taxonomy_terms[0]->name . '</p>';
-                }
-                ?>
+                if ($taxonomy_terms && !is_wp_error($taxonomy_terms)): ?>
+              <p class="voice-card__category"><?php echo esc_html($taxonomy_terms[0]->name); ?></p>
+              <?php endif; ?>
             </div>
-            <h3 class="voice-card__title"><?php echo wp_trim_words( get_the_title(), 22, '…' ); ?></h3>
+            <h3 class="voice-card__title"><?php echo wp_trim_words( esc_html(get_the_title()), 22, '…' ); ?></h3>
           </div>
           <div class="voice-card__image js-colorbox">
-            <?php if (has_post_thumbnail()) { ?>
+            <?php if (has_post_thumbnail()): ?>
             <?php the_post_thumbnail('medium'); ?>
-            <?php } else { ?>
-            <img src="<?php echo esc_url(get_theme_file_uri('')); ?>/assets/images/common/no-image.jpg" alt="画像無し">
-            <?php } ?>
+            <?php else: ?>
+            <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/common/no-image.jpg"
+              alt="画像無し">
+            <?php endif; ?>
           </div>
         </div>
-        <p class="voice-card__text"><?php the_field('voice_text'); ?></p>
+        <p class="voice-card__text"><?php echo esc_html(get_field('voice_text')); ?></p>
       </div>
       <?php endwhile; ?>
       <?php wp_reset_postdata(); ?>
-      <?php else : ?>
-      <p>記事が見つかりませんでした</p>
-      <?php endif; ?>
     </div>
+    <?php else: ?>
+    <p>記事が見つかりませんでした</p>
+    <?php endif; ?>
+
     <div class="voice__button">
-      <a href="<?php echo $voice; ?>" class="button"><span>view&nbsp;more</span></a>
+      <a href="<?php echo esc_url($voice); ?>" class="button"><span>view&nbsp;more</span></a>
     </div>
   </div>
 </section>
+
 
 <section class="price top-price">
   <div class="price__inner inner">
@@ -311,75 +320,70 @@ $sitemap = esc_url( home_url( '/sitemap/' ) );
           <h3 class="menu-list__title">ライセンス講習</h3>
           <dl class="menu-list__items">
             <?php
-                $licenses = SCF::get('licenses', 41);
-                foreach ($licenses as $license ) {
-                  $license_course = esc_html( $license['license-course'] );
-                  $license_price = esc_html( $license['license-price'] );?>
-            <?php if($license_course && $license_price): ?>
+            $licenses = SCF::get_option_meta('theme-options-price', 'licenses');
+            foreach ($licenses as $license):
+              $license_course = esc_html($license['license-course']);
+              $license_price = esc_html($license['license-price']);
+              if ($license_course && $license_price): ?>
             <div class="menu-list__item">
-              <?php $license_course = str_replace("#BR#", "<br class='u-mobile'>", $license_course); ?>
               <dt class="menu-list__course"><?php echo $license_course ?></dt>
-              <dd class="menu-list__price">&yen;<?php echo $license_price ?></dd>
+              <dd class="menu-list__price">&yen;<?php echo number_format((float)$license_price); ?></dd>
             </div>
             <?php endif; ?>
-            <?php } ?>
+            <?php endforeach; ?>
           </dl>
         </div>
         <div class="price__menu menu-list">
           <h3 class="menu-list__title">体験ダイビング</h3>
           <dl class="menu-list__items">
             <?php
-                $experiences = SCF::get('experiences', 41);
-                foreach ($experiences as $experience ) {
-                  $experience_course = esc_html( $experience['experience-course'] );
-                  $experience_price = esc_html( $experience['experience-price'] );?>
-            <?php if($experience_course && $experience_price): ?>
+            $experiences = SCF::get_option_meta('theme-options-price', 'experiences');
+            foreach ($experiences as $experience):
+              $experience_course = esc_html($experience['experience-course']);
+              $experience_price = esc_html($experience['experience-price']);
+              if ($experience_course && $experience_price): ?>
             <div class="menu-list__item">
-              <?php $experience_course = str_replace("#BR#", "<br class='u-mobile'>", $experience_course); ?>
               <dt class="menu-list__course"><?php echo $experience_course ?></dt>
-              <dd class="menu-list__price">&yen;<?php echo $experience_price ?></dd>
+              <dd class="menu-list__price">&yen;<?php echo number_format($experience_price); ?></dd>
             </div>
             <?php endif; ?>
-            <?php } ?>
+            <?php endforeach; ?>
           </dl>
         </div>
         <div class="price__menu menu-list">
           <h3 class="menu-list__title">ファンダイビング</h3>
           <dl class="menu-list__items">
             <?php
-            $funs = SCF::get('funs', 41);
-            foreach ($funs as $fun ) {
-              $fun_course = esc_html( $fun['fun-course'] );
-              $fun_price = esc_html( $fun['fun-price'] );?>
-            <?php if($fun_course && $fun_price): ?>
+            $funs = SCF::get_option_meta('theme-options-price', 'funs');
+            foreach ($funs as $fun):
+              $fun_course = esc_html($fun['fun-course']);
+              $fun_price = esc_html($fun['fun-price']);
+              if ($fun_course && $fun_price): ?>
             <div class="menu-list__item">
-              <?php $fun_course = str_replace("#BR#", "<br class='u-mobile'>", $fun_course); ?>
               <dt class="menu-list__course"><?php echo $fun_course ?></dt>
-              <dd class="menu-list__price">&yen;<?php echo $fun_price ?></dd>
+              <dd class="menu-list__price">&yen;<?php echo number_format((float)$fun_price); ?></dd>
             </div>
             <?php endif; ?>
-            <?php } ?>
+            <?php endforeach; ?>
           </dl>
         </div>
         <div class="price__menu menu-list">
           <h3 class="menu-list__title">スペシャルダイビング</h3>
           <dl class="menu-list__items">
             <?php
-            $specials = SCF::get('specials', 41);
-            foreach ($specials as $special ) {
-              $special_course = esc_html( $special['special-course'] );
-              $special_price = esc_html( $special['special-price'] );?>
-            <?php if($special_course && $special_price): ?>
+            $specials = SCF::get_option_meta('theme-options-price', 'specials');
+            foreach ($specials as $special):
+              $special_course = esc_html($special['special-course']);
+              $special_price = esc_html($special['special-price']);
+              if ($special_course && $special_price): ?>
             <div class="menu-list__item">
-              <?php $special_course = str_replace("#BR#", "<br class='u-mobile'>", $special_course); ?>
               <dt class="menu-list__course"><?php echo $special_course ?></dt>
-              <dd class="menu-list__price">&yen;<?php echo $special_price ?></dd>
+              <dd class="menu-list__price">&yen;<?php echo number_format((float)$special_price); ?></dd>
             </div>
             <?php endif; ?>
-            <?php } ?>
+            <?php endforeach; ?>
           </dl>
         </div>
-        </ul>
       </div>
     </div>
     <div class="price__button">

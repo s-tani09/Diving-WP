@@ -1,5 +1,4 @@
 <?php get_header(); ?>
-
 <main>
   <div class="sub-mv">
     <div class="sub-mv__inner">
@@ -53,14 +52,18 @@
         <div class="about-gallery__modal js-modal-window"></div>
         <div class="about-gallery__image-items">
           <?php
-                $gallery_images = SCF::get('gallery-images');
-                foreach ($gallery_images as $gallery) {
-                    $gallery_piece = wp_get_attachment_url($gallery['gallery_item']);
-                    if ($gallery_piece): ?>
-          <li class="about-gallery__image-item js-modal"><img src="<?php echo $gallery_piece ?>" alt="ギャラリーイメージ画像">
+        $gallery_images = SCF::get_option_meta('theme-options-gallery' , 'gallery-images');
+        foreach ($gallery_images as $gallery):
+          $gallery_item = wp_get_attachment_image_src($gallery['gallery_item'], 'full');
+          if ($gallery_item):
+        ?>
+          <li class="about-gallery__image-item js-modal">
+            <img src="<?= esc_url($gallery_item[0]) ?>" alt="ギャラリーイメージ画像">
           </li>
-          <?php endif;
-                } ?>
+          <?php
+          endif;
+        endforeach;
+        ?>
         </div>
       </div>
     </div>

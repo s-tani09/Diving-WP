@@ -16,16 +16,15 @@
       </div>
     </div>
   </div>
-  <!-- パンくず -->
   <?php get_template_part('parts/breadcrumb') ?>
   <div class="page-faq sub-faq">
     <div class="page-faq__inner inner">
       <div class="page-faq__contents">
         <dl class="page-faq__content faq-lists js-faq-lists">
           <?php
-            $faq_group = SCF::get('faq-group');
-            foreach ($faq_group as $fields ) {; ?>
-          <?php if(esc_html( $fields['question'] ) && esc_html( $fields['answer'] )): ?>
+            $faq_group = SCF::get_option_meta( 'theme-options-faq', 'faq_group' );
+            foreach ($faq_group as $fields ) :
+              if(esc_html( $fields['question'] ) && esc_html( $fields['answer'] )): ?>
           <div class="faq-lists__items faq-list">
             <dt class="faq-list__question js-faq-question">
               <p class="faq-list__title"><?php echo esc_html( $fields['question'] ); ?></p>
@@ -36,8 +35,7 @@
               </p>
             </dd>
           </div>
-          <?php endif; ?>
-          <?php } ?>
+          <?php endif; endforeach ;?>
         </dl>
       </div>
     </div>

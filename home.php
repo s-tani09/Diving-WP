@@ -60,7 +60,9 @@
             </div>
           </div>
         </div>
-        <?php get_sidebar(); ?>
+        <div class="post-blog__side">
+          <?php get_sidebar(); ?>
+        </div>
       </div>
     </div>
   </section>

@@ -1,6 +1,6 @@
 <?php get_header(); ?>
-<main>
 
+<main>
   <div class="sub-mv">
     <div class="sub-mv__inner">
       <div class="sub-mv__image">
@@ -16,7 +16,7 @@
       </div>
     </div>
   </div>
-  <!-- パンくず -->
+
   <?php get_template_part('parts/breadcrumb') ?>
 
   <section class="archive-voice sub-voice">
@@ -35,48 +35,48 @@
             ?>
             <?php foreach ($terms as $term): ?>
             <li class="categories__item">
-              <a class="js-categories-item"
-                href="<?php echo get_term_link($term->term_id); ?>"><?php echo $term->name; ?></a>
+              <a class="js-categories-item" href="<?php echo get_term_link($term->term_id); ?>">
+                <?php echo $term->name; ?>
+              </a>
             </li>
             <?php endforeach; ?>
           </ul>
         </div>
       </div>
+
       <div class="archive-voice__cards voice-cards">
-        <?php if (have_posts()) : ?>
-        <?php while (have_posts()) : the_post(); ?>
+        <?php if (have_posts()): while (have_posts()): the_post(); ?>
         <div class="voice-cards__container voice-card js-voice-content">
           <div class="voice-card__wrap">
             <div class="voice-card__box">
               <div class="voice-card__meta">
                 <?php
-              $age =  get_field('voice-age');
-              $gender = get_field('voice-gender');
-              ?>
-                <p class="voice-card__age"><?php if($age): ?><?php echo $age ?>代<?php endif; ?>(<?php echo $gender ?>)
+                  $age = get_field('voice-age');
+                  $gender = get_field('voice-gender');
+                  ?>
+                <p class="voice-card__age">
+                  <?php if ($age): ?><?php echo esc_html($age); ?>代<?php endif; ?>(<?php echo esc_html($gender); ?>)
                 </p>
                 <?php
-                $taxonomy_terms = get_the_terms($post->ID, 'voice_category');
-                if ($taxonomy_terms) {
-                  echo '<p class="voice-card__category">' . $taxonomy_terms[0]->name . '</p>';
-                }
-                ?>
+                  $taxonomy_terms = get_the_terms($post->ID, 'voice_category');
+                  if ($taxonomy_terms): ?>
+                <p class="voice-card__category"><?php echo $taxonomy_terms[0]->name; ?></p>
+                <?php endif; ?>
               </div>
-              <h3 class="voice-card__title"><?php echo wp_trim_words( get_the_title(), 22, '…' ); ?></h3>
+              <h3 class="voice-card__title"><?php echo wp_trim_words(get_the_title(), 22, '…'); ?></h3>
             </div>
             <div class="voice-card__image js-colorbox">
-              <?php if (has_post_thumbnail()) { ?>
+              <?php if (has_post_thumbnail()): ?>
               <?php the_post_thumbnail('medium'); ?>
-              <?php } else { ?>
+              <?php else: ?>
               <img src="<?php echo esc_url(get_theme_file_uri('')); ?>/dist/assets/images/common/no-image.jpg"
                 alt="画像無し">
-              <?php } ?>
+              <?php endif; ?>
             </div>
           </div>
           <p class="voice-card__text"><?php the_field('voice_text'); ?></p>
         </div>
-        <?php endwhile; ?>
-        <?php else: ?>
+        <?php endwhile; else: ?>
         <p>記事が見つかりませんでした</p>
         <?php endif; ?>
       </div>
@@ -89,4 +89,5 @@
     </div>
   </div>
 </main>
+
 <?php get_footer(); ?>
