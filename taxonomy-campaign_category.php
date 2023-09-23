@@ -29,11 +29,11 @@
               <a class="js-categories-item" href="<?php echo esc_url(home_url('/campaign/')); ?>">ALL</a>
             </li>
             <?php
-                    $args = [
-                      'taxonomy' => 'campaign_category'
-                    ];
-                    $terms = get_terms($args);
-                    ?>
+              $args = [
+                'taxonomy' => 'campaign_category'
+              ];
+              $terms = get_terms($args);
+              ?>
             <?php foreach ($terms as $term): ?>
             <li class="categories__item">
               <a class="js-categories-item"
@@ -48,11 +48,11 @@
         <?php while(have_posts()): the_post(); ?>
         <div class="archive-campaign-cards__item campaign-card">
           <div class="campaign-card__image">
-            <?php if (has_post_thumbnail()) { ?>
+            <?php if (has_post_thumbnail()) : ?>
             <?php the_post_thumbnail('large'); ?>
-            <?php } else { ?>
-            <img src="<?php echo esc_url(get_theme_file_uri('')); ?>/dist/assets/images/common/noimage.png" alt="画像無し">
-            <?php } ?>
+            <?php else : ?>
+            <img src="<?php echo esc_url(get_theme_file_uri('')); ?>/dist/assets/images/common/no-image.jpg" alt="画像無し">
+            <?php endif; ?>
           </div>
           <div class="campaign-card__body campaign-card__body--sub">
             <div class="campaign-card__category">
@@ -68,16 +68,20 @@
           <div class="campaign-card__textBlock campaign-card__textBlock--sub">
             <p class="campaign-card__text">全部コミコミ(お一人様)</p>
             <div class="campaign-card__price campaign-card__price--sub">
+              <?php if (get_field('price')) : ?>
+              <?php $price = floatval(str_replace(',', '', get_field('price'))); ?>
               <p class="campaign-card__price-regular campaign-card__price-regular--sub">
-                &yen;<?php the_field('price'); ?></p>
-              <p class="campaign-card__price-sale">&yen;<?php the_field('price_sale'); ?></p>
+                &yen;<?php echo number_format($price); ?></p>
+              <?php endif; ?>
+              <?php if (get_field('price_sale')) : ?>
+              <?php $price_sale = floatval(str_replace(',', '', get_field('price_sale'))); ?>
+              <p class="campaign-card__price-sale">&yen;<?php echo number_format($price_sale); ?></p>
+              <?php endif; ?>
             </div>
-            <p class="campaign-card__explanation u-desktop">
-              <?php the_field('text'); ?>
-            </p>
+            <p class="campaign-card__explanation u-desktop"><?php the_field('text'); ?></p>
           </div>
           <div class="campaign-card__guidance u-desktop">
-            <p class="campaign-card__period"><?php the_field('date_start'); ?>-<?php the_field('date_end'); ?></p>
+            <p class="campaign-card__period"><?php the_field('data_start'); ?>-<?php the_field('data_end'); ?></p>
             <p class="campaign-card__reserve">ご予約・お問い合わせはコチラ</p>
             <div class="campaign-card__button">
               <a href="<?php echo $contact; ?>" class="button"><span>contact&nbsp;us</span></a>
@@ -91,7 +95,6 @@
       </div>
     </div>
   </section>
-
   <div class="pagenavi">
     <div class="pagenavi__inner inner">
       <?php wp_pagenavi(); ?>
