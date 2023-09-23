@@ -55,7 +55,7 @@
                   $gender = get_field('voice-gender');
                   ?>
                 <p class="voice-card__age">
-                  <?php if ($age): ?><?php echo esc_html($age); ?>代<?php endif; ?>(<?php echo esc_html($gender); ?>)
+                  <?php if ($age): ?><?php echo esc_html($age); ?><?php endif; ?>(<?php echo esc_html($gender); ?>)
                 </p>
                 <?php
                   $taxonomy_terms = get_the_terms($post->ID, 'voice_category');
